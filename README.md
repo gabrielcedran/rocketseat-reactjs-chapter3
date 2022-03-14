@@ -17,22 +17,6 @@ Run the command `yarn create next-app {app-name}`.
 
 The folder `pages` can only be in two places - either in the root directory or inside src and cannot be renamed. Each file inside the pages folder become a route in the application (aka *file system routing*).
 
-#### Notes
-
-##### Prevent reloading resources unnecessarily multiple times
-
-Every time a user changes the page the application is reloaded from the `_app.tsx`. If you need something to repeat across the application (a header for instace) you have to include it in the `_app.tsx` file. 
-
-Another important concept is when you don't want something to reload multiple times. E.g when you download a font you don't want it to redownload everytime the user changes the page. In this cases you have to use the `_document.tsx` file - _document.tsx file works similarly to _app.tsx however it is loaded only once (at some extend it is like the index.html that only loads the react app entry point).
-
-_refer to the commit_
-
-##### Defining custom headers per route (page)
-
-Nextjs has a component named Head that can be included anywhere within a route and allows custom head tags definition (title, metatags, etc).
-
-Refer to commit to check implementation details.
-
 #### Adding typescript
 
 Run the command `yarn add typescript @types/react @types/node -D` and rename `.js` files to `.tsx`. Next identifies that typescript has been added and automatically generates the `tsconfig.json` file.
@@ -106,3 +90,30 @@ Using other css in js framework like styled components.
 ### Adding custom fonts
 
 Add the font tags in the _document.tsx file. Refer to section [prevent reloading resources unnecessarily multiple times](#Prevent-reloading-resources-unnecessarily-multiple-times) for more information.
+
+
+#### Notes
+
+##### Prevent reloading resources unnecessarily multiple times
+
+Every time a user changes the page the application is reloaded from the `_app.tsx`. If you need something to repeat across the application (a header for instace) you have to include it in the `_app.tsx` file. 
+
+Another important concept is when you don't want something to reload multiple times. E.g when you download a font you don't want it to redownload everytime the user changes the page. In this cases you have to use the `_document.tsx` file - _document.tsx file works similarly to _app.tsx however it is loaded only once (at some extend it is like the index.html that only loads the react app entry point).
+
+_refer to the commit_
+
+##### Defining custom headers per route (page)
+
+Nextjs has a component named Head that can be included anywhere within a route and allows custom head tags definition (title, metatags, etc).
+
+Refer to commit to check implementation details.
+
+##### Consuming API data from the nextjs not the browser
+
+It is possible to consume API in the react traditional way using useEffect (and useState). However it will not return a page ready from the "backend" and will be executed on the browser - falling in the indexing issues and not taking full advantage of the SSR model.
+
+API calls only work on nextjs "native" pages not on "regular" reactjs components. If a component needs access information provided by an api on the server side, that piece of information has to be provided by the page via props.
+
+To consume an api from the backend use the component `GetServerSideProps`. For an example of implementation check commit.
+
+
