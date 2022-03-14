@@ -116,4 +116,37 @@ API calls only work on nextjs "native" pages not on "regular" reactjs components
 
 To consume an api from the backend use the component `GetServerSideProps`. For an example of implementation check commit.
 
+```
+// the function MUST have this name
+export const getServerSideProps: GetServerSideProps = async () => {
+  // fetch data from an api
+  return {
+    props: { // this props will be passed down to the page component
+      product: 'abc'
+    }
+  }
+}
+```
 
+##### Static Site Generation
+
+There might be instances where the generated html will be the same for all users (or parts of it). A million users would cause the same processing a million times. Static Site Generation closes this gap and cache the generated html (or api's result) to simply return it in further requests dismissing all the processing.
+
+To use the static site generation mechanism, use the component `GetStaticProps` (it is used in the same way** as GetServerSideProps the only difference is that it is only executed once while instead of every time a request is made to the server).
+
+** the only difference is the property `revalidate` that is used to set a refresh of the generated content in seconds.
+
+Refer to commit for further details.
+
+```
+// the function MUST have this name
+export const getStaticProps: GetStaticProps = async () => {
+  // fetch data from an api
+  return {
+    props: { // this props will be passed down to the page component
+      product: 'abc'
+    },
+    revalidate: 60 * 60 * 24
+  }
+}
+```
