@@ -27,6 +27,12 @@ Another important concept is when you don't want something to reload multiple ti
 
 _refer to the commit_
 
+##### Defining custom headers per route (page)
+
+Nextjs has a component named Head that can be included anywhere within a route and allows custom head tags definition (title, metatags, etc).
+
+Refer to commit to check implementation details.
+
 #### Adding typescript
 
 Run the command `yarn add typescript @types/react @types/node -D` and rename `.js` files to `.tsx`. Next identifies that typescript has been added and automatically generates the `tsconfig.json` file.
