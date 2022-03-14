@@ -13,4 +13,6 @@ Another secondary benefit, even though most of the cases it is not the case, cus
 
 ### Creating a nextjs application
 
-Run the command `yarn create next-app {app-name}`.
+Run the command `yarn create next-app {app-name}`. 
+
+The folder `pages` can only be in two places - either in the root directory or inside src and cannot be renamed. Each file inside the pages folder become a route in the application (aka file system routing).
