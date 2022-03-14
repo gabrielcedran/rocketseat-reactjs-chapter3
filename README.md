@@ -15,13 +15,23 @@ Another secondary benefit, even though most of the cases it is not the case, cus
 
 Run the command `yarn create next-app {app-name}`. 
 
-The folder `pages` can only be in two places - either in the root directory or inside src and cannot be renamed. Each file inside the pages folder become a route in the application (aka file system routing).
+The folder `pages` can only be in two places - either in the root directory or inside src and cannot be renamed. Each file inside the pages folder become a route in the application (aka *file system routing*).
+
+#### Notes
+
+##### Prevent reloading resources unnecessarily multiple times
+
+Every time a user changes the page the application is reloaded from the `_app.tsx`. If you need something to repeat across the application (a header for instace) you have to include it in the `_app.tsx` file. 
+
+Another important concept is when you don't want something to reload multiple times. E.g when you download a font you don't want it to redownload everytime the user changes the page. In this cases you have to use the `_document.tsx` file - _document.tsx file works similarly to _app.tsx however it is loaded only once (at some extend it is like the index.html that only loads the react app entry point).
+
+_refer to the commit_
 
 #### Adding typescript
 
 Run the command `yarn add typescript @types/react @types/node -D` and rename `.js` files to `.tsx`. Next identifies that typescript has been added and automatically generates the `tsconfig.json` file.
 
-### Styling components
+### Styling components with sass
 
 There are many ways of styling components when using next.js:
 
@@ -87,3 +97,6 @@ _nextjs supports scss and sass out of box_
 
 Using other css in js framework like styled components.
 
+### Adding custom fonts
+
+Add the font tags in the _document.tsx file. Refer to section [prevent reloading resources unnecessarily multiple times](#Prevent-reloading-resources-unnecessarily-multiple-times) for more information.
