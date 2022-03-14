@@ -150,3 +150,13 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 ```
+
+Summary of the three ways of consuming APIs with NextJS:
+
+ - Client Side - when there is no need for SEO indexing or the page is loaded based on an action of the user
+ - Server Side Rendering - when there is user specific information but indexing is still necessary
+ - Static Site Generation - for everything that is irrespective of user (html shared among all the people accessing the application e.g posts of a blog, page of a product) 
+
+ Blog:
+ - Posts could be SSG
+ - Comments SSR or Client Side (SSR would hold the page loading not allowing the client to start reading the post while the comments are loaded. But it is an architectural decision)
