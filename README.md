@@ -167,3 +167,4 @@ Summary of the three ways of consuming APIs with NextJS:
  Blog:
  - Posts could be SSG
  - Comments SSR or Client Side (SSR would hold the page loading not allowing the client to start reading the post while the comments are loaded. But it is an architectural decision)
+ 
