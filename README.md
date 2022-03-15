@@ -10,12 +10,19 @@ Another secondary benefit, even though most of the cases it is not the case, cus
 
 ![SPA vs SSR](/docs/spa-ssr.png)
 
+Besides the mentioned above, using next also brings flexibility and extra security in two forms - (1) it can hide sensitive information like api_keys and details about the backend (2) it allows the creation of features that consume data from external providers (and even dbs) without the need of a backend at all in a safe way as keys as details won't be available directly on the frontend (it does not mean that it will be handled like this all the time and the need for a backend is dismissed). 
+
+*Api routes are deployed in a serveless fashions thus there is no formal server like express or node awating requests for those routes. Every time an api route is accessed an isolated environment to execute the request is span up and once it is done that isolated env is destroyed. Using DBs meant and optimised for serverless applications is imperative (e.g dynamo or ). Opening and close db connections is heavy thus traditional DBs might not be the best choice*   
+
+
 
 ### Creating a nextjs application
 
 Run the command `yarn create next-app {app-name}`. 
 
 The folder `pages` can only be in two places - either in the root directory or inside src and cannot be renamed. Each file inside the pages folder become a route in the application (aka *file system routing*).
+
+Each file inside `pages/api` becomes a `"backend"` api.
 
 #### Adding typescript
 
