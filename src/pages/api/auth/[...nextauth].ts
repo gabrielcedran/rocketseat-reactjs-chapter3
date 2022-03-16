@@ -20,9 +20,26 @@ export default NextAuth({
             
             try {
                 await fauna.query(
-                    q.Create(
-                        q.Collection('users'),
-                        { data: { username } }
+                    q.If(
+                        q.Not(
+                            q.Exists(
+                                q.Match(
+                                    q.Index('user_by_username'),
+                                    q.Casefold(username)
+                                )
+                            )
+                        ),
+                        q.Create(
+                            q.Collection('users'),
+                            { data: { username } }
+                        ),
+                        //q.Update = could update if the user exists
+                        q.Get(
+                            q.Match(
+                                q.Index('user_by_username'),
+                                q.Casefold(username)
+                            )
+                        )
                     )
                 )
                 return true
