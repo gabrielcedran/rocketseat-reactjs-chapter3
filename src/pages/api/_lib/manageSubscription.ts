@@ -2,7 +2,7 @@ import { query as q } from "faunadb";
 import { fauna } from "../../../services/fauna";
 import { stripe } from "../../../services/stripe";
 
-export async function saveSubscription(subscriptionId: string, customerId: string) {
+export async function saveSubscription(subscriptionId: string, customerId: string, createAction: boolean) {
 
     const userRef = await fauna.query(
         q.Select(
@@ -16,11 +16,8 @@ export async function saveSubscription(subscriptionId: string, customerId: strin
         )
     )
 
-    console.log("userRef", userRef)
-
     const subscription = await stripe.subscriptions.retrieve(subscriptionId);
 
-    console.log(subscription)
     const subscriptionData = {
         id: subscription.id,
         user_ref: userRef,
@@ -28,9 +25,29 @@ export async function saveSubscription(subscriptionId: string, customerId: strin
         price_id: subscription.items.data[0].price.id
     }
 
-    await fauna.query(
-        q.Create(
-            q.Collection('subscriptions'), {data: subscriptionData }
+    if (createAction) {
+        await fauna.query(
+            q.Create(
+                q.Collection('subscriptions'), {data: subscriptionData }
+            )
         )
-    )
+    } else {
+        console.log("\n\n\neyeee\n\n\n")
+        await fauna.query(
+            q.Replace( // q.Update would also work. In this case it would be possible to only update the status rather than replace the whole doc
+                q.Select('ref', 
+                    q.Get(
+                        q.Match(
+                            q.Index('subscription_by_id'),
+                            subscription.id
+                        )
+                    )
+                ),
+                {
+                    data: subscriptionData
+                }
+            )
+        )
+    }
+
 }
