@@ -168,3 +168,17 @@ Summary of the three ways of consuming APIs with NextJS:
  - Posts could be SSG
  - Comments SSR or Client Side (SSR would hold the page loading not allowing the client to start reading the post while the comments are loaded. But it is an architectural decision)
  
+
+##### JAMStack
+
+Stands for (J)avascript (A)pi (M)arkup. The concept behind it is applications that rely less on a formal backend in order to deliver its functionalities (but it does not dismiss the backend all together). 
+
+Besides bringing more flexibility to the frontend it also enables backend to focus on what it should in fact focus: on the business logic rather on presentation matters (to reflect about later: would be a good BFF? At first it seems so).
+
+##### Headless CMS (content management system)
+
+It comes only with an administration dashboard but no frontend to present the content to users - the data is provided to the frontend via API.
+
+Free headless CMS's: strapi (general use), ghost (for blogs), keystone (general use)
+Paid headless CMS's: prismic, contentful, shopify (for e-commerces), saleor (graphql for e-commerces)
+
