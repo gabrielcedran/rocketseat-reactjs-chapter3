@@ -147,7 +147,7 @@
     "@prismicio/helpers" "^2.1.1"
     "@prismicio/types" "^0.1.24"
 
-"@prismicio/helpers@^2.1.1":
+"@prismicio/helpers@^2.1.1", "@prismicio/helpers@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@prismicio/helpers/-/helpers-2.2.0.tgz#75fedf38f8c8f82f88421dca3de489f7b6c9d2ee"
   integrity sha512-qgszdfBrPqn4NdmBiyNK+USfUWuI21HCCOMJMoq2R6jp4YDbxcXD7RjixNPK9mjZRtraHnrHzFO/ABK1gLgQIA==
