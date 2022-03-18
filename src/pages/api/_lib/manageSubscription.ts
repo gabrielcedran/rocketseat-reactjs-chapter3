@@ -32,7 +32,6 @@ export async function saveSubscription(subscriptionId: string, customerId: strin
             )
         )
     } else {
-        console.log("\n\n\neyeee\n\n\n")
         await fauna.query(
             q.Replace( // q.Update would also work. In this case it would be possible to only update the status rather than replace the whole doc
                 q.Select('ref', 
