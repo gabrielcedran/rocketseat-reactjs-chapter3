@@ -167,7 +167,37 @@ Summary of the three ways of consuming APIs with NextJS:
  Blog:
  - Posts could be SSG
  - Comments SSR or Client Side (SSR would hold the page loading not allowing the client to start reading the post while the comments are loaded. But it is an architectural decision)
- 
+
+###### Strategies to generate static content
+
+1. At building time
+2. Upon first access
+3. Hybrid - part at build time and part upon first access 
+
+The advantage of generating the static pages at building time is that is already ready to be served once the first client requests it - it gains performance. However if too many pages are generated during the building time, the build itself will be penalised.
+
+To determine which pages have to be generated at building time, just provide their path in the return of the `getStaticPaths` function:
+
+```
+// preview/[slug].tsx
+export const getStaticPaths: GetStaticPaths = async () => {
+    // could have access to external apis and dbs
+    return {
+        paths: [{
+            params: {slug: 'python-linguagem-popular-com-berco-na-comedia-inglesa'}
+        }],
+        fallback: 'blocking'
+    }
+}
+```
+
+Leaving paths empty means everything will be generated upon first access.
+
+To fine tune performance, a good strategy could be just generate the most accessed static pages and leave the rest to be generated upon first access (hybrid model).
+
+
+Ps. 1. getStaticPaths is mandatory when `getStaticProps` is used along with `params` argument. 2. static pages without parameters are always generated during the build.
+
 
 ##### JAMStack
 

@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { getSession, useSession } from "next-auth/react";
 import { getPrismicClient } from "../../../services/prismic";
 import * as prismicH from '@prismicio/helpers';
@@ -45,10 +45,14 @@ export default function PostPreview({post}: PostPreviewProps) {
     );
 }
 
-export const getStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+    // could have access to external apis and dbs
     return {
         paths: [],
-        fallback: 'blocking'
+        fallback: 'blocking' // it accepts:
+        // true - if the page has not been generated yet, partially loads the page and performs the request to the server in real time (mostly processing on the client side) - causes layout shift and is not good for SEOs
+        // false - if the page has not been generated yet, renders a 404
+        // blocking - if the page has not been generated yet, waits for the server side generation before rendering anything
     }
 }
 
